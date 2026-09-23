@@ -1,11 +1,11 @@
 public class Adventure {
-    private Room theFirstRoom;
+    private Room currentRoom;
 
     public Adventure(){
         makeLabyrinth();
     }
-    public Room getTheFirstRoom(){
-        return theFirstRoom;
+    public Room getCurrentRoom(){
+        return currentRoom;
 
     }
 
@@ -21,7 +21,7 @@ public class Adventure {
     Room room8 = new Room("Room 8", "");
     Room room9 = new Room("Room 9", "");
 
-    theFirstRoom = room1;
+    currentRoom = room1;
 
     room1.setEast(room2);
     room1.setSouth(room4);
@@ -49,10 +49,14 @@ public class Adventure {
 
     room9.setWest(room8);
     room9.setNorth(room6);
+
+
     }
 
 
-
+public String look(){
+        return currentRoom.getName() + "\n" + currentRoom.getDescription();
+}
 
 
 

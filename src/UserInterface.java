@@ -1,11 +1,16 @@
 public class UserInterface {
-    public void StartAdventure(){
 
+    private Adventure adventure;
+
+    public UserInterface(Adventure adventure){
+        this.adventure = adventure;
+    }
+    public void startAdventure() {
         boolean activeAdventure = true;
         IO.println("Welcome to the adventure game, you can move in 4 directions by typing n for north, e for east, s for south, w for west.");
-        while(activeAdventure){
+        while (activeAdventure) {
             String command = IO.readln("hvilken retning vil du gå?");
-            switch (command){
+            switch (command) {
                 case "n" -> {
                     IO.println("you go north");
                 }
@@ -18,14 +23,14 @@ public class UserInterface {
                 case "w" -> {
                     IO.println("you go west");
                 }
-                case "look" ->{
-                    IO.println("You look around");
+                case "look" -> {
+                    IO.println(adventure.look());
                 }
-                case "Exit"-> {
+                case "Exit" -> {
                     IO.println("goodbye");
                     activeAdventure = false;
                 }
-                case "Help"->{
+                case "Help" -> {
                     IO.println("The commands are; n for north, e for east, w for west, s for south, Help for help, and Exit for exit.");
                 }
             }
