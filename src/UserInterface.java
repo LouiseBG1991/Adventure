@@ -12,16 +12,35 @@ public class UserInterface {
             String command = IO.readln("hvilken retning vil du gå?");
             switch (command) {
                 case "n" -> {
-                    IO.println("you go north");
+                    if(adventure.goNorth()){
+                        IO.println("you go north");
+                    }else {
+                        IO.println("you cant go north");
+                    }
                 }
                 case "s" -> {
-                    IO.println("you go south");
+                    if(adventure.goSouth()) {
+                        IO.println("you go south");
+                    } else {
+                        IO.println("you cant go south");
+                    }
                 }
                 case "e" -> {
-                    IO.println("you go east");
+                    if (adventure.goEast()){
+                        IO.println("you go east");
+                    }else {
+                        IO.println("you cant go east");
+                    }
+
                 }
                 case "w" -> {
-                    IO.println("you go west");
+                    if (adventure.goWest()){
+                        IO.println("you go west");
+                    } else {
+                        IO.println("you cant go west");
+                    }
+
+
                 }
                 case "look" -> {
                     IO.println(adventure.look());
