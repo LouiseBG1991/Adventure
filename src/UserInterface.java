@@ -1,3 +1,4 @@
+// Brugergrænseflade
 public class UserInterface {
 
     private Adventure adventure;
@@ -10,7 +11,7 @@ public class UserInterface {
         boolean activeAdventure = true;
         IO.println("Welcome to the adventure game, you can move in 4 directions by typing n for north, e for east, s for south, w for west.");
         while (activeAdventure) {
-            String command = IO.readln("hvilken retning vil du gå?");
+            String command = IO.readln("\nWhich direction do you wanna go?");
             switch (command) {
                 case "go north", "n" -> {
                     if (adventure.go("north")) {
@@ -45,6 +46,7 @@ public class UserInterface {
                 }
                 case "look" -> {
                     IO.println(adventure.look());
+                    IO.println(adventure.makeMap());
                 }
                 case "Exit" -> {
                     IO.println("goodbye");
