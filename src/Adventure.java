@@ -25,7 +25,6 @@ public class Adventure {
         return gameMap.makeMap();
     }
 
-
     }
 
 

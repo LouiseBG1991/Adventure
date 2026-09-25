@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+
 // Spilleren
 public class Player {
     private Room currentRoom; // Det rum, som spilleren befinder sig i
+    private ArrayList<Item> playerItems;
 
     // Konstruktør til at oprette en ny spiller i det første rum
     public Player (Room currentRoom) {
         this.currentRoom = currentRoom;
+        this.playerItems = new ArrayList<>();
     }
 
     //Henter rummet, som spilleren aktuelt befinder sig i
@@ -32,4 +36,12 @@ public class Player {
         currentRoom = nextRoom;
         return true;
     }
+    public void takeItem(Item item ){
+        playerItems.add(item);
+    }
+    public boolean removeItem(Item item){
+        return playerItems.remove(item);
+
+    }
+
 }

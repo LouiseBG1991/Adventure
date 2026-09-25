@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 //Kort over spillet
 public class GameMap {
     private Player player; // Spilleren
@@ -8,6 +10,9 @@ public class GameMap {
     public GameMap() {
         makeLabyrinth();
     }
+
+
+
 
     //Sætter spilleren på kortet
     public void setPlayer (Player player) {
@@ -71,6 +76,15 @@ public class GameMap {
         map[0][2]=room3;
         map[1][2]=room6;
         map[2][2]=room9;
+
+        Item sword = new Item("Sword", "A sharp sword");
+        Item lamp = new Item("Lamp", "a shiny brass lamp");
+        Item dungeonMap = new Item("Map", "a map of the dungeon");
+
+        room1.addItem(sword);
+        room1.addItem(lamp);
+        room2.addItem(dungeonMap);
+
 }
 
     // Udskriver et kort i konsollen, hvor spillerens aktuelle position markeres med X
