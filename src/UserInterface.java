@@ -91,13 +91,27 @@ public class UserInterface {
     }
 
     public void inventory() {
+        if (adventure.getPlayerItems() == null) {
+            IO.println("You are not carrying anything.");
+        } else {
+            String inventoryText = "You are carrying: ";
+            // Går igennem alle items i inventory
+            for (int i = 0; i < adventure.getPlayerItems().size(); i++) {
 
-        // Går igennem alle items spilleren bærer
-        for (Item item : adventure.getPlayerItems()) {
+                // henter item og tilføjer beskrivelse til teksten
+                inventoryText = inventoryText + adventure.getPlayerItems().get(i).getItemDescription();
 
-            // Udskriver beskrivelsen af hvert item
-            IO.println(item.getItemDescription());
+                // kontrollerer om item er det sidste i inventory
+                if (i < adventure.getPlayerItems().size() - 1) {
+
+                    // Hvis flere items tilføjes et komma og mellemrum
+                    inventoryText = inventoryText + ", ";
+                }
+            }
+
+            // udskirver inventory
+            IO.println(inventoryText);
         }
-    }
 
+    }
 }
