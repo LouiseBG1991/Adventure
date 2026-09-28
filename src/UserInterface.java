@@ -43,11 +43,11 @@ public class UserInterface {
                 continue;
             }
             switch (command) {
-                case "inventory" -> inventory();
-                case "north" -> goDirection("north");
-                case "east" -> goDirection("east");
-                case "west" -> goDirection("west");
-                case "south" -> goDirection("south");
+                case "inventory", "inv" -> inventory();
+                case "north", "n" -> goDirection("north");
+                case "east", "e" -> goDirection("east");
+                case "west", "w" -> goDirection("west");
+                case "south", "s" -> goDirection("south");
                 case "exit" -> exit(activeAdventure);
                 case "help" -> help();
                 case "look" -> look();
@@ -106,34 +106,52 @@ public class UserInterface {
         }
 
     }
-    public void help (){
+
+    public void help() {
         IO.println("The commands are; n for north, e for east, w for west, s for south, Help for help, and Exit for exit.");
     }
-    public void look (){
+
+    public void look() {
         IO.println(adventure.look());
         IO.println(adventure.makeMap());
     }
-    public void exit (boolean activeAdventure){
+
+    public void exit(boolean activeAdventure) {
         IO.println("goodbye");
         activeAdventure = false;
     }
 
-    public void goDirection(String direction){
+    public void goDirection(String direction) {
         if (adventure.go(direction)) {
-            IO.println("you go "+ direction);
+            IO.println("you go " + direction);
         } else {
-            IO.println("you cant go "+ direction);
+            IO.println("you cant go " + direction);
         }
 
     }
+
     public void inventory() {
+        if (adventure.getPlayerItems() == null) {
+            IO.println("You are not carrying anything.");
+        } else {
+            String inventoryText = "You are carrying: ";
+            // Går igennem alle items i inventory
+            for (int i = 0; i < adventure.getPlayerItems().size(); i++) {
 
-        // Går igennem alle items spilleren bærer
-        for (Item item : adventure.getPlayerItems()) {
+                // henter item og tilføjer beskrivelse til teksten
+                inventoryText = inventoryText + adventure.getPlayerItems().get(i).getItemDescription();
 
-            // Udskriver beskrivelsen af hvert item
-            IO.println(item.getItemDescription());
+                // kontrollerer om item er det sidste i inventory
+                if (i < adventure.getPlayerItems().size() - 1) {
+
+                    // Hvis flere items tilføjes et komma og mellemrum
+                    inventoryText = inventoryText + ", ";
+                }
+            }
+
+            // udskirver inventory
+            IO.println(inventoryText);
         }
-    }
 
+    }
 }
