@@ -6,13 +6,13 @@ public class Player {
     private ArrayList<Item> playerItems;
 
     // Konstruktør til at oprette en ny spiller i det første rum
-    public Player (Room currentRoom) {
+    public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
         this.playerItems = new ArrayList<>();
     }
 
     //Henter rummet, som spilleren aktuelt befinder sig i
-    public Room getCurrentRoom () {
+    public Room getCurrentRoom() {
         return currentRoom;
     }
 
@@ -36,12 +36,40 @@ public class Player {
         currentRoom = nextRoom;
         return true;
     }
-    public void takeItem(Item item ){
+
+    public void takeItem(Item item) {
         playerItems.add(item);
     }
-    public boolean removeItem(Item item){
+
+    public boolean removeItem(Item item) {
         return playerItems.remove(item);
 
     }
 
+    public ArrayList<Item> getPlayerItems() {
+        return playerItems;
+    }
+
+    public Item findDropItemByName(String name) {
+        for (Item item : playerItems) {
+            if (item.getItemName().equalsIgnoreCase(name)) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean dropItem(Item chosenItem) {
+        if (chosenItem == null) {
+            return false;
+        }
+        for (Item item : playerItems) {
+            if (removeItem(chosenItem)) {
+                currentRoom.addItem(chosenItem);
+                return true;
+            }
+        }
+        return false;
+    }
 }

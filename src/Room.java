@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Room {
@@ -10,42 +9,41 @@ public class Room {
     private Room west;
     private ArrayList<Item> roomItems;
 
-    public Room (String name, String description) {
+    public Room(String name, String description) {
         this.name = name;
         this.description = description;
         this.roomItems = new ArrayList<>();
     }
 
-
-    public Room getNorth (){
+    public Room getNorth() {
         return north;
     }
 
-    public Room getEast () {
+    public Room getEast() {
         return east;
     }
 
-    public Room getSouth () {
+    public Room getSouth() {
         return south;
     }
 
-    public Room getWest () {
+    public Room getWest() {
         return west;
     }
 
-    public void setNorth (Room north) {
+    public void setNorth(Room north) {
         this.north = north;
     }
 
-    public void setEast (Room east) {
+    public void setEast(Room east) {
         this.east = east;
     }
 
-    public void setWest (Room west) {
+    public void setWest(Room west) {
         this.west = west;
     }
 
-    public void setSouth (Room south) {
+    public void setSouth(Room south) {
         this.south = south;
     }
 
@@ -54,21 +52,30 @@ public class Room {
 
     }
 
-    public String getDescription () {
+    public String getDescription() {
         return description;
     }
 
-    public void addItem(Item item){
+    public void addItem(Item item) {
         roomItems.add(item);
     }
 
-    public ArrayList<Item> getRoomItems(){
+    public boolean removeRoomItem(Item item) {
+        return roomItems.remove(item);
+
+    }
+
+    public ArrayList<Item> getRoomItems() {
         return roomItems;
     }
 
+    public Item findItemByName(String name) {
+        for (Item item : roomItems) {
+            if (item.getItemName().equalsIgnoreCase(name)) {
+                return item;
+            }
+        }
 
-//    public void addItemsToRoom(ArrayList Items, Room chosenRoom, Item item){
-//        addItems(item);
-//    }
-
+        return null;
+    }
 }

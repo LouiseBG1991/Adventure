@@ -5,14 +5,12 @@ public class GameMap {
     private Player player; // Spilleren
     private Room currentRoom; // Det rum, spilleren befinder sig i
     private Room[][] map = new Room[3][3]; // Det visuelle kort
+    private Room [] rooms;
 
     //Konstruktør, som initialiserer og opretter labyrinten
     public GameMap() {
         makeLabyrinth();
     }
-
-
-
 
     //Sætter spilleren på kortet
     public void setPlayer (Player player) {
@@ -28,15 +26,18 @@ public class GameMap {
     // Forbindelsen mellem rummene bestemmes
     // Rummene placeres i et 2D-array, så vi kan lave et visuelt kort
     public void makeLabyrinth() {
-        Room room1 = new Room("\nRoom 1", "A room with no distinct features, except two doors.");
-        Room room2 = new Room("\nRoom 2", "Water drips from the ceiling somewhere in the dark");
-        Room room3 = new Room("\nRoom 3", "Theres a small rock in the corner of the room");
-        Room room4 = new Room("\nRoom 4", "Theres something or someone hiding in the corner...");
-        Room room5 = new Room("\nRoom 5", "You got to the last room");
-        Room room6 = new Room("\nRoom 6", "You should hurry");
-        Room room7 = new Room("\nRoom 7", "The light flickers");
-        Room room8 = new Room("\nRoom 8", "There is a spider in the entrance");
-        Room room9 = new Room("\nRoom 9", "The water is rising");
+        Room room1 = new Room("Room 1", "A room with no distinct features, except two doors.");
+        Room room2 = new Room("Room 2", "Water drips from the ceiling somewhere in the dark");
+        Room room3 = new Room("Room 3", "Theres a small rock in the corner of the room");
+        Room room4 = new Room("Room 4", "Theres something or someone hiding in the corner...");
+        Room room5 = new Room("Room 5", "You got to the last room");
+        Room room6 = new Room("Room 6", "You should hurry");
+        Room room7 = new Room("Room 7", "The light flickers");
+        Room room8 = new Room("Room 8", "There is a spider in the entrance");
+        Room room9 = new Room("Room 9", "The water is rising");
+
+        rooms = new Room[]{room1, room2, room3, room4, room5,
+                room6, room7, room8, room9};
 
         currentRoom = room1;
 
@@ -88,7 +89,7 @@ public class GameMap {
 }
 
     // Udskriver et kort i konsollen, hvor spillerens aktuelle position markeres med X
-    public String makeMap() {
+    public String makeMapMap() {
         IO.println("\nMap that shows your position in the labyrinth:");
         IO.println();
 
@@ -106,5 +107,8 @@ public class GameMap {
             IO.println();
         }
         return "";
+    }
+    public Room[] getGameMapRooms() {
+        return rooms;
     }
 }

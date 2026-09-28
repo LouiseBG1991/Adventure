@@ -1,17 +1,18 @@
 // Brugergrænseflade
 public class UserInterface {
-
+    private DrawMap drawMap;
     private Adventure adventure;
 
-    public UserInterface(Adventure adventure) {
+    public UserInterface(Adventure adventure, DrawMap drawMap) {
         this.adventure = adventure;
+        this.drawMap = drawMap;
     }
 
     public void startAdventure() {
         boolean activeAdventure = true;
         IO.println("Welcome to the adventure game, you can move in 4 directions by typing n for north, e for east, s for south, w for west.");
         while (activeAdventure) {
-            String command = IO.readln("\nWhich direction do you wanna go?");
+            String command = IO.readln("\nWhich action do you wanna take?");
             switch (command) {
                 case "go north", "n" -> {
                     if (adventure.go("north")) {
@@ -41,19 +42,44 @@ public class UserInterface {
                     } else {
                         IO.println("you cant go west");
                     }
-
-
                 }
                 case "look" -> {
                     IO.println(adventure.look());
-                    IO.println(adventure.makeMap());
+                    IO.println(adventure.lookItems());
+                    IO.println(gamemap.makeMapMap);
                 }
-                case "Exit" -> {
-                    IO.println("goodbye");
-                    activeAdventure = false;
+
+                case "take" -> {
+                    String chosenItemName = IO.readln("which item do you want to take?");
+                    Item chosenItem = adventure.findPickupItem(chosenItemName);
+                    if (adventure.pickupItem(chosenItem)){
+                        IO.println("you picked up " + chosenItem.getItemName());
+                    }else {
+                        IO.println("the item is not in the room");
+                    }
+
+                }
+                case "drop" -> {
+                    String dropItem = IO.readln("which item do you want to drop?");
+                    Item chosenDropItem = adventure.findDropItem(dropItem);
+                    if(adventure.dropItem(chosenDropItem)){
+                        IO.println("you dropped " + chosenDropItem.getItemName());
+                    } else {
+                        IO.println("you cant drop that item");
+                    }
+                }
+                case "map"-> {
+                    drawMap.drawRoom();
                 }
                 case "Help" -> {
                     IO.println("The commands are; n for north, e for east, w for west, s for south, Help for help, and Exit for exit.");
+                }
+                case "inventory" -> {
+                    IO.println(adventure.getPlayerItems());
+                }
+                case "Exit", "exit" -> {
+                    IO.println("goodbye");
+                    activeAdventure = false;
                 }
                 default -> {
                     IO.println("invalid input");

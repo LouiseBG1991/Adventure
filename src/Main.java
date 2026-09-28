@@ -1,5 +1,7 @@
 void main() {
     Adventure adventure = new Adventure();
-    UserInterface userInterface = new UserInterface(adventure);
+    DrawMap drawMap = new DrawMap(adventure.getRooms(),adventure);
+
+    UserInterface userInterface = new UserInterface(adventure, drawMap);
     userInterface.startAdventure();
 }
