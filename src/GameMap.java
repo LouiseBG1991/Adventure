@@ -11,9 +11,6 @@ public class GameMap {
         makeLabyrinth();
     }
 
-
-
-
     //Sætter spilleren på kortet
     public void setPlayer (Player player) {
         this.player = player;
@@ -77,9 +74,9 @@ public class GameMap {
         map[1][2]=room6;
         map[2][2]=room9;
 
-        Item sword = new Item("Sword", "A sharp sword");
-        Item lamp = new Item("Lamp", "a shiny brass lamp");
-        Item dungeonMap = new Item("Map", "a map of the dungeon");
+        Item sword = new Item("sword", "A sharp sword");
+        Item lamp = new Item("lamp", "a shiny brass lamp");
+        Item dungeonMap = new Item("map", "a map of the dungeon");
 
         room1.addItem(sword);
         room1.addItem(lamp);
@@ -93,7 +90,7 @@ public class GameMap {
         IO.println();
 
         Room playerCurrentRoom = (player != null) ? player.getCurrentRoom() : currentRoom;
-        // ternary operator (forkoret if/else)
+        // ternary operator (forkortet if/else)
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 // Brugergrænseflade
 public class UserInterface {
 
@@ -11,7 +13,7 @@ public class UserInterface {
         boolean activeAdventure = true;
         IO.println("Welcome to the adventure game, you can move in 4 directions by typing n for north, e for east, s for south, w for west.");
         while (activeAdventure) {
-            String command = IO.readln("\nWhich direction do you wanna go?");
+            String command = IO.readln("\nWhich action do you wanna take?");
             switch (command) {
                 case "go north", "n" -> {
                     if (adventure.go("north")) {
@@ -42,12 +44,35 @@ public class UserInterface {
                         IO.println("you cant go west");
                     }
 
-
                 }
                 case "look" -> {
                     IO.println(adventure.look());
                     IO.println(adventure.makeMap());
                 }
+                case "take" -> {
+                    String itemName = IO.readln("Which item do you wanna take?");
+                    Item item = adventure.takeItem(itemName);
+                    if (item != null) {
+                        IO.println("You have taken " + item.getItemDescription());
+                    } else {
+                        IO.println("There is nothing like " + item.getItemName() + " to take around here");
+                    }
+
+                }
+                case "drop" -> {
+                    String itemName = IO.readln("Which item do you wanna drop?");
+                    Item item = adventure.dropItem(itemName);
+                    if (item != null) {
+                        IO.println("You have dropped " + item.getItemDescription());
+                    } else {
+                        IO.println("You can't drop that item");
+                    }
+                }
+
+                case "inventory" -> {
+                    IO.println(adventure.getInventory()); // betingelser: hvad hvis listen er tom?
+                }
+
                 case "Exit" -> {
                     IO.println("goodbye");
                     activeAdventure = false;
