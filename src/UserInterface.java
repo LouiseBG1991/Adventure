@@ -46,7 +46,7 @@ public class UserInterface {
                 case "look" -> {
                     IO.println(adventure.look());
                     IO.println(adventure.lookItems());
-                    IO.println(gamemap.makeMapMap);
+                    IO.println(adventure.makeMap());
                 }
 
                 case "take" -> {

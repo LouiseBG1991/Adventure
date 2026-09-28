@@ -62,6 +62,10 @@ public class Adventure {
     public Room getCurrentRoom() {
         return player.getCurrentRoom();
     }
+    public String makeMap (){
+        return gameMap.makeMapMap();
+    }
 }
+
 
 
