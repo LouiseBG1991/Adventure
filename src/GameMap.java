@@ -77,9 +77,9 @@ public class GameMap {
         map[1][2]=room6;
         map[2][2]=room9;
 
-        Item sword = new Item("Sword", "A sharp sword");
-        Item lamp = new Item("Lamp", "a shiny brass lamp");
-        Item dungeonMap = new Item("Map", "a map of the dungeon");
+        Item sword = new Item("sword", "a sharp sword");
+        Item lamp = new Item("lamp", "a shiny brass lamp");
+        Item dungeonMap = new Item("map", "a map of the dungeon");
 
         room1.addItem(sword);
         room1.addItem(lamp);
