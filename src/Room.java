@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Room {
@@ -61,9 +60,28 @@ public class Room {
     public void addItem(Item item){
         roomItems.add(item);
     }
-
+    // Fjerner et item fra rummets liste
+    public boolean removeItem(Item item) {
+        return roomItems.remove(item);
+    }
     public ArrayList<Item> getRoomItems(){
         return roomItems;
+    }
+
+    // Finder et item i rummet ud fra itemets korte navn
+    public Item findItem(String itemName) {
+
+        // Går igennem alle items, der ligger i rummet
+        for (Item item : roomItems) {
+
+            // Tjekker om itemets navn matcher det navn, vi leder efter
+            if (item.getItemName().equals(itemName)) {
+                return item;
+            }
+        }
+
+        // Hvis vi har gennemgået hele listen uden at finde noget
+        return null;
     }
 
 

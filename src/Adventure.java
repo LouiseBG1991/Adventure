@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 // denne klasse fungerer som en slags controller, der sender GameMap og Player-metoderne videre til UserInterface
 public class Adventure {
     private GameMap gameMap;
@@ -15,6 +16,15 @@ public class Adventure {
         return player.go(direction);
     }
 
+    // Sender take-kommandoen videre til Player
+    public Item takeItem(String itemName) {
+        return player.takeItem(itemName);
+    }
+    //Sender drop-kommandoen videre til Player
+    public Item dropItem(String itemName) {
+        return player.dropItem(itemName);
+    }
+
     // Viser spilleren, hvad der er i rummet
     public String look () {
         return player.look();
@@ -23,6 +33,10 @@ public class Adventure {
     // Viser spilleren et visuelt kort over han/hun befinder sig
     public String makeMap () {
         return gameMap.makeMap();
+    }
+    // Henter spillerens inventory
+    public ArrayList<Item> getPlayerItems() {
+        return player.getPlayerItems();
     }
 
     }

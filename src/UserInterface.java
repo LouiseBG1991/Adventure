@@ -11,8 +11,38 @@ public class UserInterface {
         boolean activeAdventure = true;
         IO.println("Welcome to the adventure game, you can move in 4 directions by typing n for north, e for east, s for south, w for west.");
         while (activeAdventure) {
-            String command = IO.readln("\nWhich direction do you wanna go?");
-            switch (command) {
+            String command = IO.readln("\nWhich action do you wanna take? ");
+            // Tjekker om brugeren skriver fx "take lamp"
+            if (command.startsWith("take ")) {
+
+                // Henter item-navnet fra kommandoen
+                // "take lamp" bliver til "lamp"
+                String itemName = command.substring(5);
+
+                // Beder Adventure om at forsøge at tage item'et
+                Item item = adventure.takeItem(itemName);
+
+                // Hvis takeItem returnerer null, blev item'et ikke fundet
+                if (item == null) {
+                    IO.println("There is nothing like " + itemName + " to take around here");
+                } else {
+                    // Ellers blev item'et fundet og fjernet fra rummet
+                    IO.println("You have taken " + item.getItemDescription());
+                }
+
+                continue;
+            }
+            if (command.startsWith("drop ")) {
+                String itemName = command.substring(5);
+                Item item = adventure.dropItem(itemName);
+                if (item == null) {
+                    IO.println("You don't have anything like " + itemName + " in your inventory");
+                } else {
+                    IO.println("You have dropped " + item.getItemDescription());
+                }
+                continue;
+            }
+                switch (command) {
                 case "go north", "n" -> {
                     if (adventure.go("north")) {
                         IO.println("you go north");
@@ -54,6 +84,15 @@ public class UserInterface {
                 }
                 case "Help" -> {
                     IO.println("The commands are; n for north, e for east, w for west, s for south, Help for help, and Exit for exit.");
+                }
+                case "inventory", "inv" -> {
+
+                    // Går igennem alle items spilleren bærer
+                    for (Item item : adventure.getPlayerItems()) {
+
+                        // Udskriver beskrivelsen af hvert item
+                        IO.println(item.getItemDescription());
+                    }
                 }
                 default -> {
                     IO.println("invalid input");
