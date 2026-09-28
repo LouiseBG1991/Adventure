@@ -48,61 +48,12 @@ public class UserInterface {
                 case "east" -> goDirection("east");
                 case "west" -> goDirection("west");
                 case "south" -> goDirection("south");
-                case "exit" -> exit(activeAdventure);
+                case "exit" -> {exit();activeAdventure = false;}
                 case "help" -> help();
                 case "look" -> look();
                 default -> IO.println("invalid input");
             }
-//            switch (command) {
-//                case "go north", "n" -> {
-//                    if (adventure.go("north")) {
-//                        IO.println("you go north");
-//                    } else {
-//                        IO.println("you cant go north");
-//                    }
-//                }
-//                case "s" -> {
-//                    if (adventure.go("south")) {
-//                        IO.println("you go south");
-//                    } else {
-//                        IO.println("you cant go south");
-//                    }
-//                }
-//                case "e" -> {
-//                    if (adventure.go("east")) {
-//                        IO.println("you go east");
-//                    } else {
-//                        IO.println("you cant go east");
-//                    }
-//
-//                }
-//                case "w" -> {
-//                    if (adventure.go("west")) {
-//                        IO.println("you go west");
-//                    } else {
-//                        IO.println("you cant go west");
-//                    }
-//
-//
-//                }
-//                case "look" -> {
-//                    IO.println(adventure.look());
-//                    IO.println(adventure.makeMap());
-//                }
-//                case "Exit" -> {
-//                    IO.println("goodbye");
-//                    activeAdventure = false;
-//                }
-//                case "Help" -> {
-//                    IO.println("The commands are; n for north, e for east, w for west, s for south, Help for help, and Exit for exit.");
-//                }
-//                case "inventory", "inv" -> {
-//                    inventory();
-//                }
-//                default -> {
-//                    IO.println("invalid input");
-//                }
-//            }
+
         }
 
     }
@@ -113,9 +64,10 @@ public class UserInterface {
         IO.println(adventure.look());
         IO.println(adventure.makeMap());
     }
-    public void exit (boolean activeAdventure){
+    public void exit (){
         IO.println("goodbye");
-        activeAdventure = false;
+
+
     }
 
     public void goDirection(String direction){
