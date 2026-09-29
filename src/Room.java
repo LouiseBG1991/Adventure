@@ -8,11 +8,13 @@ public class Room {
     private Room south;
     private Room west;
     private ArrayList<Item> roomItems;
+    private boolean light;
 
     public Room (String name, String description) {
         this.name = name;
         this.description = description;
         this.roomItems = new ArrayList<>();
+        this.light = true;
     }
 
 
@@ -68,6 +70,16 @@ public class Room {
         return roomItems;
     }
 
+    public boolean getLight(){
+        return light;
+    }
+
+    public boolean setLightFalse (){
+        return this.light = false;
+    }
+    public boolean setLightTrue (){
+       return this.light = true;
+    }
     // Finder et item i rummet ud fra itemets korte navn
     public Item findItem(String itemName) {
 
