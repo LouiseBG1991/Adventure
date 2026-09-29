@@ -31,6 +31,7 @@ public class UserInterface {
                 case "help" -> help();
                 case "look" -> look();
                 case "light" -> light();
+                case "health" -> IO.println(adventure.getHealthDescription());
                 default -> IO.println("invalid input");
             }
 
@@ -132,4 +133,5 @@ public class UserInterface {
         }
 
     }
+
 }
