@@ -4,11 +4,13 @@ import java.util.ArrayList;
 public class Player {
     private Room currentRoom; // Det rum, som spilleren befinder sig i
     private ArrayList<Item> playerItems;
+    private int health;
 
     // Konstruktør til at oprette en ny spiller i det første rum
     public Player (Room currentRoom) {
         this.currentRoom = currentRoom;
         this.playerItems = new ArrayList<>();
+        this.health = 100;
     }
 
     //Henter rummet, som spilleren aktuelt befinder sig i
@@ -113,6 +115,23 @@ public class Player {
     public boolean removeItem(Item item){
         return playerItems.remove(item);
 
+    }
+    public String healthDescription(){
+        if(health <= 100){
+            return "You have full health";
+        }else if (health <=60) {
+            return "You should find some food";
+        }else if (health == 0){
+            return "youre dead";
+        }else{
+            return "You really should find some food";
+        }
+
+
+    }
+
+    public int getHealth (){
+        return health;
     }
 
 }

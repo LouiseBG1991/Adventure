@@ -52,6 +52,12 @@ public class Adventure {
     public boolean setLightFalse(){
         return getCurrentRoom().setLightTrue();
     }
+    public int getHealth() {
+        return player.getHealth();
+    }
+    public String getHealthDescription(){
+        return player.healthDescription();
+    }
     }
 
 
