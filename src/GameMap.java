@@ -90,6 +90,16 @@ public class GameMap {
         room1.addItem(lamp);
         room2.addItem(dungeonMap);
 
+        Food bread = new Food("bread", "a loaf of stale bread", 10);
+        Food mushroom = new Food("mushrrom", "a pale glowing mushroom",-50);
+        Food steak = new Food("steak", "a juicy steak", 60);
+        Food fish = new Food("fish", "a smelly fish", -40);
+
+        room4.addItem(bread);
+        room7.addItem(mushroom);
+        room8.addItem(steak);
+        room5.addItem(fish);
+
 }
 
     // Udskriver et kort i konsollen, hvor spillerens aktuelle position markeres med X
