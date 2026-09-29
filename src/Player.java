@@ -146,7 +146,7 @@ public class Player {
             if(item.getItemName().equalsIgnoreCase(chosenEatItem)){
                 if (item instanceof Food food){
                     return EatResult.EATEN;
-                } if (item instanceof Item){
+                } if (!(item instanceof Item)){
                     return EatResult.NOT_FOOD;
                 }
             }
