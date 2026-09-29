@@ -126,12 +126,31 @@ public class Player {
         }else{
             return "You really should find some food";
         }
-
-
     }
 
     public int getHealth (){
         return health;
     }
 
+    public EatResult eat (String chosenEatItem){
+        for (Item item : playerItems) {
+            if (item.getItemName().equalsIgnoreCase(chosenEatItem)) {
+                if (item instanceof Food food) {
+                    return EatResult.EATEN;
+                }if (!(item instanceof Food) ){
+                    return EatResult.NOT_FOOD;
+                }
+            }
+        }
+        for (Item item : getCurrentRoom().getRoomItems()){
+            if(item.getItemName().equalsIgnoreCase(chosenEatItem)){
+                if (item instanceof Food food){
+                    return EatResult.EATEN;
+                } if (item instanceof Item){
+                    return EatResult.NOT_FOOD;
+                }
+            }
+        }
+        return EatResult.NOT_FOUND;
+    }
 }
