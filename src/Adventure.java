@@ -58,6 +58,13 @@ public class Adventure {
     public String getHealthDescription(){
         return player.healthDescription();
     }
+    public String getItemName (){
+        return getItemName();
+    }
+
+    public EatResult getEatResult(String food){
+        return player.eat(food);
+    }
     }
 
 

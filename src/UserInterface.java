@@ -21,6 +21,10 @@ public class UserInterface {
                 drop(command);
                 continue;
             }
+            if (command.startsWith("eat")){
+                eat(command);
+                continue;
+            }
             switch (command) {
                 case "inventory" -> inventory();
                 case "north" -> goDirection("north");
@@ -66,6 +70,13 @@ public class UserInterface {
         } else {
             IO.println("You have dropped " + item.getItemDescription());
         }
+    }
+    public void eat(String command){
+        String foodName = command.substring(4);
+        EatResult result = adventure.getEatResult(foodName);
+
+        IO.println(result);
+
     }
 
     public void help() {
