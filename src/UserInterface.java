@@ -30,6 +30,7 @@ public class UserInterface {
                 case "exit" -> {exit();activeAdventure = false;}
                 case "help" -> help();
                 case "look" -> look();
+                case "light" -> light();
                 default -> IO.println("invalid input");
             }
 
@@ -71,8 +72,12 @@ public class UserInterface {
     }
 
     public void look() {
-        IO.println(adventure.look());
-        IO.println(adventure.makeMap());
+        if (adventure.getCurrentRoom().getLight()) {
+            IO.println(adventure.look());
+            IO.println(adventure.makeMap());
+        } else {
+            IO.println("You cant see anything, you should turn on the light");
+        }
     }
 
     public void exit() {
@@ -82,12 +87,25 @@ public class UserInterface {
     }
 
     public void goDirection(String direction) {
-        if (adventure.go(direction)) {
-            IO.println("you go " + direction);
+        if (adventure.getCurrentRoom().getLight()) {
+            if (adventure.go(direction)) {
+                IO.println("you go " + direction);
+            } else {
+                IO.println("you cant go " + direction);
+            }
         } else {
-            IO.println("you cant go " + direction);
+            IO.println("You cant see anything");
         }
+    }
 
+    public void light() {
+        if (adventure.getCurrentRoom().getLight()) {
+            adventure.setLightFalse();
+            IO.println("You turned off the light");
+        } else {
+            adventure.setLightTrue();
+            IO.println("You turned on the light");
+        }
     }
 
     public void inventory() {

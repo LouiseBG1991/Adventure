@@ -38,7 +38,20 @@ public class Adventure {
     public ArrayList<Item> getPlayerItems() {
         return player.getPlayerItems();
     }
+    public Room getCurrentRoom (){
+        return gameMap.getCurrentRoom();
+    }
+    public Room getLight (){
+        return getLight();
+    }
 
+    public boolean setLightTrue(){
+        return getCurrentRoom().setLightTrue();
+    }
+
+    public boolean setLightFalse(){
+        return getCurrentRoom().setLightTrue();
+    }
     }
 
 

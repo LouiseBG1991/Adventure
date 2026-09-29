@@ -39,6 +39,11 @@ public class GameMap {
         Room room9 = new Room("\nRoom 9", "The water is rising");
 
         currentRoom = room1;
+        room1.setLightFalse();
+        room5.setLightFalse();
+        room7.setLightFalse();
+        room8.setLightFalse();
+
 
         room1.setEast(room2);
         room1.setSouth(room4);
