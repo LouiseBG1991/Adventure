@@ -91,7 +91,7 @@ public class GameMap {
         room2.addItem(dungeonMap);
 
         Food bread = new Food("bread", "a loaf of stale bread", 10);
-        Food mushroom = new Food("mushrrom", "a pale glowing mushroom",-50);
+        Food mushroom = new Food("mushroom", "a pale glowing mushroom",-50);
         Food steak = new Food("steak", "a juicy steak", 60);
         Food fish = new Food("fish", "a smelly fish", -40);
 

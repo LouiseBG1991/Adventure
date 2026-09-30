@@ -10,6 +10,7 @@ public class UserInterface {
     public void startAdventure() {
         boolean activeAdventure = true;
         IO.println("Welcome to the adventure game, you can move in 4 directions by typing n for north, e for east, s for south, w for west.");
+        IO.println("Remember to turn on the light!");
         while (activeAdventure) {
             String command = IO.readln("\nWhich action do you wanna take? ");
             // Tjekker om brugeren skriver fx "take lamp"
@@ -27,10 +28,10 @@ public class UserInterface {
             }
             switch (command) {
                 case "inventory" -> inventory();
-                case "north" -> goDirection("north");
-                case "east" -> goDirection("east");
-                case "west" -> goDirection("west");
-                case "south" -> goDirection("south");
+                case "north", "n" -> goDirection("north");
+                case "east", "e" -> goDirection("east");
+                case "west", "w" -> goDirection("west");
+                case "south", "s" -> goDirection("south");
                 case "exit" -> {exit();activeAdventure = false;}
                 case "help" -> help();
                 case "look" -> look();
@@ -72,12 +73,18 @@ public class UserInterface {
         }
     }
     public void eat(String command){
+        //det virker, men hvordan får jeg fat i itemDescription? Og hvordan bestemmer vi om mad er godt eller dårligt jf. opgavebeskrivelsen
+        // tænker vi skal lave en metode i food-klassen eller enum??
         String foodName = command.substring(4);
         EatResult result = adventure.getEatResult(foodName);
-
-        IO.println(result);
-
-    }
+        if (result == EatResult.NOT_FOUND) {
+            IO.println("There is nothing like " + foodName + " to eat around here");
+        } else if (result == EatResult.NOT_FOOD) {
+            IO.println("You cannot eat " + foodName);
+        } else if (result == EatResult.EATEN) {
+            IO.println("You eat " + foodName);
+        }
+        }
 
     public void help() {
         IO.println("The commands are; n for north, e for east, w for west, s for south, Help for help, and Exit for exit.");
