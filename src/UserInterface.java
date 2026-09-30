@@ -128,7 +128,7 @@ public class UserInterface {
     }
 
     public void inventory() {
-        if (adventure.getPlayerItems() == null) {
+        if (adventure.getPlayerItems().isEmpty()) {
             IO.println("You are not carrying anything.");
         } else {
             String inventoryText = "You are carrying: ";
