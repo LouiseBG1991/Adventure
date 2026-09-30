@@ -80,7 +80,7 @@ public class UserInterface {
         if (result == EatResult.NOT_FOUND) {
             IO.println("There is nothing like " + foodName + " to eat around here");
         } else if (result == EatResult.NOT_FOOD) {
-            IO.println("You cannot eat " + foodName);
+            IO.println("You cannot eat " + foodName +": "+  adventure.findItemByName(foodName).getItemDescription());
         } else if (result == EatResult.EATEN) {
             IO.println("You eat " + foodName);
         }

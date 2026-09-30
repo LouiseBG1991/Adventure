@@ -65,6 +65,9 @@ public class Adventure {
     public EatResult getEatResult(String food){
         return player.eat(food);
     }
+    public Item findItemByName (String chosenItem){
+        return player.findItemByName(chosenItem);
+    }
     }
 
 

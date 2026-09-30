@@ -155,4 +155,18 @@ public class Player {
         }
         return EatResult.NOT_FOUND;
     }
+
+    public Item findItemByName (String chosenEatItem){
+        for (Item item : playerItems) {
+            if (item.getItemName().equalsIgnoreCase(chosenEatItem)) {
+                    return item;
+            }
+        }
+        for (Item item : getCurrentRoom().getRoomItems()){
+            if(item.getItemName().equalsIgnoreCase(chosenEatItem)){
+                    return item;
+            }
+        }
+        return null;
+    }
 }
