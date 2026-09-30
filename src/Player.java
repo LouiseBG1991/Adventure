@@ -136,6 +136,7 @@ public class Player {
         for (Item item : playerItems) {
             if (item.getItemName().equalsIgnoreCase(chosenEatItem)) {
                 if (item instanceof Food food) {
+                    playerItems.remove(food); // fjerner maden fra inventory, når den er blevet spist
                     return EatResult.EATEN;
                 }if (!(item instanceof Food) ){ // Er den ikke redundant, altså kan man ikke bare skrive else?, det virker i hvert fald, når man kører programmet :)
                     return EatResult.NOT_FOOD;
@@ -145,6 +146,7 @@ public class Player {
         for (Item item : getCurrentRoom().getRoomItems()){
             if(item.getItemName().equalsIgnoreCase(chosenEatItem)){
                 if (item instanceof Food food){
+                    currentRoom.removeItem(food); // fjerner maden fra rummet, når den er blevet spist
                     return EatResult.EATEN;
                 } if (!(item instanceof Food)){ // rettede til Food fra Item, da den sprang NOT_FOOD over i kommandoen, men er den ikke også redundant
                     return EatResult.NOT_FOOD;
