@@ -92,6 +92,7 @@ public class UserInterface {
         } else {
             IO.println("You have dropped " + item.getItemDescription());
         }
+
     }
     public void eat(String command){
         //det virker, men hvordan får jeg fat i itemDescription? Og hvordan bestemmer vi om mad er godt eller dårligt jf. opgavebeskrivelsen

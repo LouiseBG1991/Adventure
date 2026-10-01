@@ -14,6 +14,10 @@ public class Item {
     public String getItemDescription() {
         return itemDescription;
     }
+    @Override
+    public String toString(){
+        return String.format("%s , %s ", itemName, itemDescription);
+    }
 
     @Override
     public boolean equals(Object obj) {

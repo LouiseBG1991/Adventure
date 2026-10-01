@@ -25,6 +25,7 @@ public class Adventure {
         return player.dropItem(itemName);
     }
 
+
     // Viser spilleren, hvad der er i rummet
     public String look () {
         return player.look();
