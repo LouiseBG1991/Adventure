@@ -5,19 +5,14 @@ public class Player {
     private Room currentRoom; // Det rum, som spilleren befinder sig i
     private ArrayList<Item> playerItems;
     private int health;
-    private Item equippedItem;
 
     // Konstruktør til at oprette en ny spiller i det første rum
     public Player (Room currentRoom) {
         this.currentRoom = currentRoom;
         this.playerItems = new ArrayList<>();
         this.health = 100;
-        this.equippedItem = null;
     }
 
-    public Item getEquippedItem (){
-        return equippedItem;
-    }
     //Henter rummet, som spilleren aktuelt befinder sig i
     public Room getCurrentRoom () {
         return currentRoom;
@@ -172,23 +167,4 @@ public class Player {
         }
         return null;
     }
-
-    public EquipResult equip (String chosenEquipItem){
-        Item foundItem = findItemByName(chosenEquipItem);
-
-        if (foundItem == null) {
-            return EquipResult.NOT_FOUND;
-        } else if (foundItem instanceof Weapon) {
-            equippedItem =  foundItem;
-            playerItems.remove(foundItem);
-            getCurrentRoom().removeItem(foundItem);
-            return EquipResult.EQUIPPED;
-        } else if (! (foundItem instanceof Weapon)) {
-            return EquipResult.NOT_A_WEAPON;
-
-
-        }
-        return EquipResult.NOT_FOUND;
-    }
-
 }

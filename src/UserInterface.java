@@ -22,24 +22,17 @@ public class UserInterface {
                 drop(command);
                 continue;
             }
-            if (command.startsWith("eat")) {
+            if (command.startsWith("eat")){
                 eat(command);
                 continue;
             }
-            if (command.startsWith("equip")){
-                equip(command);
-            continue;
-        }
             switch (command) {
                 case "inventory" -> inventory();
                 case "north", "n" -> goDirection("north");
                 case "east", "e" -> goDirection("east");
                 case "west", "w" -> goDirection("west");
                 case "south", "s" -> goDirection("south");
-                case "exit" -> {
-                    exit();
-                    activeAdventure = false;
-                }
+                case "exit" -> {exit();activeAdventure = false;}
                 case "help" -> help();
                 case "look" -> look();
                 case "light" -> light();
@@ -50,20 +43,6 @@ public class UserInterface {
         }
 
     }
-
-    public void equip(String command) {
-        String equipItem = command.substring(6);
-        EquipResult result = adventure.getEquip(equipItem);
-        if (result == EquipResult.NOT_FOUND) {
-            IO.println("There is nothing like " + equipItem + " to equip around here");
-        } else if (result == EquipResult.NOT_A_WEAPON) {
-            IO.println("You cannot equip " + equipItem);
-        } else if (result == EquipResult.EQUIPPED) {
-            IO.println("You equip " + equipItem);
-        }
-    }
-
-
 
     public void take(String command) {
 
@@ -116,7 +95,6 @@ public class UserInterface {
         if (adventure.getCurrentRoom().getLight()) {
             IO.println(adventure.look());
             IO.println(adventure.makeMap());
-            IO.println(adventure.getEquippedItem());
         } else {
             IO.println("You cant see anything, you should turn on the light");
         }

@@ -82,16 +82,13 @@ public class GameMap {
         map[1][2]=room6;
         map[2][2]=room9;
 
-        MeleeWeapon sword = new MeleeWeapon("sword", "a sharp sword");
+        Item sword = new Item("sword", "a sharp sword");
         Item lamp = new Item("lamp", "a shiny brass lamp");
         Item dungeonMap = new Item("map", "a map of the dungeon");
-        RangedWeapon bow = new RangedWeapon("bow", "an old bow");
-
 
         room1.addItem(sword);
         room1.addItem(lamp);
         room2.addItem(dungeonMap);
-        room1.addItem(bow);
 
         Food bread = new Food("bread", "a loaf of stale bread", 10);
         Food mushroom = new Food("mushroom", "a pale glowing mushroom",-50);
