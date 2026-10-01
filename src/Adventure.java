@@ -68,6 +68,12 @@ public class Adventure {
     public Item findItemByName (String chosenItem){
         return player.findItemByName(chosenItem);
     }
+    public EquipResult getEquip(String chosenEquipItem){
+        return player.equip(chosenEquipItem);
+    }
+    public Item getEquippedItem(){
+        return player.getEquippedItem();
+    }
     }
 
 
