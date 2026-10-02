@@ -52,8 +52,8 @@ public class Adventure {
     public boolean setLightFalse(){
         return getCurrentRoom().setLightTrue();
     }
-    public int getHealth() {
-        return player.getHealth();
+    public int getPlayerHealth() {
+        return player.getPlayerHealth();
     }
     public String getHealthDescription(){
         return player.healthDescription();
@@ -62,12 +62,31 @@ public class Adventure {
         return getItemName();
     }
 
-    public EatResult getEatResult(String food){
+    public EatResult eat(String food){
         return player.eat(food);
     }
+
+    public EquipResult equip(String chosenEquipWeapon) {
+        return player.equip(chosenEquipWeapon);
+    }
+
+    public Item getEquippedWeapon() {
+        return player.getEquippedWeapon();
+    }
+
     public Item findItemByName (String chosenItem){
         return player.findItemByName(chosenItem);
     }
+
+    public AttackResult attack () {
+        return player.attack();
+    }
+
+    public int getShotsleft () {
+        return player.getShotsLeft();
+
+    }
+
     }
 
 
