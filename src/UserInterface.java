@@ -26,6 +26,15 @@ public class UserInterface {
                 eat(command);
                 continue;
             }
+            if (command.startsWith("equip")) {
+                equip(command);
+                continue;
+            }
+            if (command.startsWith("attack")) {
+                attack(command);
+                continue;
+            }
+
             switch (command) {
                 case "inventory" -> inventory();
                 case "north", "n" -> goDirection("north");
@@ -73,16 +82,40 @@ public class UserInterface {
         }
     }
     public void eat(String command){
-        //det virker, men hvordan får jeg fat i itemDescription? Og hvordan bestemmer vi om mad er godt eller dårligt jf. opgavebeskrivelsen
-        // tænker vi skal lave en metode i food-klassen eller enum??
         String foodName = command.substring(4);
-        EatResult result = adventure.getEatResult(foodName);
+        EatResult result = adventure.eat(foodName);
         if (result == EatResult.NOT_FOUND) {
-            IO.println("There is nothing like " + foodName + " to eat around here");
+            IO.println("There is nothing like " + foodName + " to eat around here.");
         } else if (result == EatResult.NOT_FOOD) {
-            IO.println("You cannot eat " + foodName);
+            IO.println("You cannot eat " + foodName + ".");
         } else if (result == EatResult.EATEN) {
-            IO.println("You eat " + foodName);
+            IO.println("You eat " + foodName + ".");
+        }
+        }
+        public void equip(String command) {
+        String weaponName = command.substring(6);
+        EquipResult result = adventure.equip(weaponName);
+        if (result == EquipResult.NOT_FOUND) {
+            IO.println("You don't have " + weaponName + " in your inventory.");
+        } else if (result == EquipResult.NOT_WEAPON) {
+            IO.println("The " + weaponName + " is not a weapon!");
+        } else if (result == EquipResult.EQUIPPED) {
+            IO.println("You have equipped " + weaponName + ".");
+        }
+        }
+
+        public void attack(String command) {
+        AttackResult result = adventure.attack();
+        Item weapon = adventure.getEquippedWeapon();
+        if (result == AttackResult.NO_WEAPON) {
+            IO.println("You don't have an equipped weapon.");
+        } else if (result == AttackResult.NO_AMMUNITION) {
+            IO.println ("You don't have any ammunition left.");
+        } else if (result == AttackResult.SWING) {
+            IO.println("You swing " + weapon.getItemDescription() + " into the air");
+        } else if (result == AttackResult.FIRE) {
+            int shots = adventure.getShotsleft();
+            IO.println("You fire " + weapon.getItemDescription() + " into the empty air. " + shots + " shots left");
         }
         }
 
@@ -148,6 +181,11 @@ public class UserInterface {
 
             // udskirver inventory
             IO.println(inventoryText);
+
+            Item equippedWeapon = adventure.getEquippedWeapon();
+            if (equippedWeapon != null) {
+                IO.println("Equipped: " + equippedWeapon.getItemDescription());
+            }
         }
 
     }

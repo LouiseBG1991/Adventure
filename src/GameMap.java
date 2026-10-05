@@ -100,6 +100,13 @@ public class GameMap {
         room8.addItem(steak);
         room5.addItem(fish);
 
+        RangedWeapon revolver = new RangedWeapon("revolver", "an old revolver",5);
+        MeleeWeapon dagger = new MeleeWeapon("dagger", "a rusty dagger");
+
+
+        room5.addItem(revolver);
+        room9.addItem(dagger);
+
 }
 
     // Udskriver et kort i konsollen, hvor spillerens aktuelle position markeres med X
