@@ -16,11 +16,11 @@ public class Adventure {
         return player.go(direction);
     }
 
-    // Sender take-kommandoen videre til Player
+    // Sender take-kommandoen videre til UI
     public Item takeItem(String itemName) {
         return player.takeItem(itemName);
     }
-    //Sender drop-kommandoen videre til Player
+    //Sender drop-kommandoen videre til UI
     public Item dropItem(String itemName) {
         return player.dropItem(itemName);
     }
@@ -82,7 +82,7 @@ public class Adventure {
         return player.attack();
     }
 
-    public int getShotsleft () {
+    public int getShotsLeft () {
         return player.getShotsLeft();
 
     }

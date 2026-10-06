@@ -65,9 +65,15 @@ public class Player {
         for (Item item : currentRoom.getRoomItems()) {
 
             // Tilføjer hvert items beskrivelse til teksten
-            roomDescription += "\n" + item.getItemDescription();
+            roomDescription += "\nHere you see: " + item.getItemDescription();
+
+        }
+
+        for (Enemy enemy : currentRoom.getEnemies()) {
+            roomDescription += "\nBeware! Here lurks: " + enemy.getEnemyDescription();
         }
         // Returnerer hele teksten til UserInterface
+
         return roomDescription;
     }
 
@@ -133,7 +139,7 @@ public class Player {
         return playerItems.remove(item);
 
     }
-    public String healthDescription(){
+    public String healthDescription(){ //fix
         IO.println("Health: " + playerHealth);
         if(playerHealth >= 100) {
             return "You have full health";
@@ -148,6 +154,17 @@ public class Player {
         }
     }
 
+    public void playerDies () {
+        IO.println("You're dead. Game over!");
+    }
+
+    public void hit (int damage) {
+        playerHealth -= damage;
+        if (playerHealth <=0) {
+            playerDies();
+        }
+    }
+    // Fjenden skal "findes", fjenden skal angribes, hvis fjenden overlever, angriber den
     public AttackResult attack () {
         if (equippedWeapon == null) {
             return AttackResult.NO_WEAPON;

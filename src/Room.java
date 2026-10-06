@@ -9,27 +9,26 @@ public class Room {
     private Room west;
     private ArrayList<Item> roomItems;
     private boolean light;
+    private ArrayList<Enemy> enemies;
 
     public Room (String name, String description) {
         this.name = name;
         this.description = description;
         this.roomItems = new ArrayList<>();
         this.light = true;
+        this.enemies = new ArrayList<>();
     }
 
 
     public Room getNorth (){
         return north;
     }
-
     public Room getEast () {
         return east;
     }
-
     public Room getSouth () {
         return south;
     }
-
     public Room getWest () {
         return west;
     }
@@ -37,48 +36,33 @@ public class Room {
     public void setNorth (Room north) {
         this.north = north;
     }
-
     public void setEast (Room east) {
         this.east = east;
     }
-
     public void setWest (Room west) {
         this.west = west;
     }
-
     public void setSouth (Room south) {
         this.south = south;
     }
 
     public String getName() {
         return name;
-
     }
-
     public String getDescription () {
         return description;
     }
 
+    //Tilføjer et item
     public void addItem(Item item){
         roomItems.add(item);
     }
     // Fjerner et item fra rummets liste
-    public boolean removeItem(Item item) {
-        return roomItems.remove(item);
+    public void removeItem(Item item) {
+        roomItems.remove(item);
     }
     public ArrayList<Item> getRoomItems(){
         return roomItems;
-    }
-
-    public boolean getLight(){
-        return light;
-    }
-
-    public boolean setLightFalse (){
-        return this.light = false;
-    }
-    public boolean setLightTrue (){
-       return this.light = true;
     }
     // Finder et item i rummet ud fra itemets korte navn
     public Item findItem(String itemName) {
@@ -97,8 +81,38 @@ public class Room {
     }
 
 
-//    public void addItemsToRoom(ArrayList Items, Room chosenRoom, Item item){
-//        addItems(item);
-//    }
+    //Liste over fjender
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+    // Tilføjer fjender
+    public void addEnemy (Enemy enemy) {
+        enemies.add(enemy);
 
+    }
+    //Fjerner en fjende fra et rum
+    public void removeEnemy (Enemy enemy) {
+        enemies.remove(enemy);
+    }
+    //Finder en fjende ud fra dens korte navn
+    public Enemy findEnemy (String enemyName) {
+        for (Enemy enemy : enemies) {
+            if (enemy.getEnemyName().equalsIgnoreCase(enemyName)) {
+                return enemy;
+            }
+        }
+
+        return null;
+    }
+
+
+    public boolean getLight(){
+        return light;
+    }
+    public boolean setLightFalse (){
+        return this.light = false;
+    }
+    public boolean setLightTrue (){
+       return this.light = true;
+    }
 }

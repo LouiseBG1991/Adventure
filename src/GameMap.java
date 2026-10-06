@@ -100,9 +100,14 @@ public class GameMap {
         room8.addItem(steak);
         room5.addItem(fish);
 
-        RangedWeapon revolver = new RangedWeapon("revolver", "an old revolver",5);
-        MeleeWeapon dagger = new MeleeWeapon("dagger", "a rusty dagger");
+        RangedWeapon revolver = new RangedWeapon("revolver", "an old revolver",5,-30);
+        MeleeWeapon dagger = new MeleeWeapon("dagger", "a rusty dagger", -10);
+        MeleeWeapon rock = new MeleeWeapon("rock", "a big rock", -15);
 
+        Enemy troll = new Enemy("troll", "a nasty troll", room9, rock);
+
+        room9.addEnemy(troll);
+        room8.addEnemy(troll);
 
         room5.addItem(revolver);
         room9.addItem(dagger);

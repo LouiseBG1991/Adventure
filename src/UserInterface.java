@@ -114,7 +114,7 @@ public class UserInterface {
         } else if (result == AttackResult.SWING) {
             IO.println("You swing " + weapon.getItemDescription() + " into the air");
         } else if (result == AttackResult.FIRE) {
-            int shots = adventure.getShotsleft();
+            int shots = adventure.getShotsLeft();
             IO.println("You fire " + weapon.getItemDescription() + " into the empty air. " + shots + " shots left");
         }
         }
