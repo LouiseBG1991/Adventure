@@ -17,7 +17,7 @@ public class Adventure {
     }
 
     // Sender take-kommandoen videre til Player
-    public Item takeItem(String itemName) {
+    public TakeResult takeItem(String itemName) {
         return player.takeItem(itemName);
     }
     //Sender drop-kommandoen videre til Player
@@ -85,6 +85,9 @@ public class Adventure {
     public int getShotsleft () {
         return player.getShotsLeft();
 
+    }
+    public boolean canCarry(String itemName) {
+        return player.canCarry(itemName);
     }
 
     }

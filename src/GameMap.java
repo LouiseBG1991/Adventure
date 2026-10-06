@@ -82,26 +82,26 @@ public class GameMap {
         map[1][2]=room6;
         map[2][2]=room9;
 
-        Item sword = new Item("sword", "a sharp sword");
-        Item lamp = new Item("lamp", "a shiny brass lamp");
-        Item dungeonMap = new Item("map", "a map of the dungeon");
+        Item sword = new Item("sword", "a sharp sword", 5.3);
+        Item lamp = new Item("lamp", "a shiny brass lamp", 0.5);
+        Item dungeonMap = new Item("map", "a map of the dungeon", 0.2);
 
         room1.addItem(sword);
         room1.addItem(lamp);
         room2.addItem(dungeonMap);
 
-        Food bread = new Food("bread", "a loaf of stale bread", 10);
-        Food mushroom = new Food("mushroom", "a pale glowing mushroom",-50);
-        Food steak = new Food("steak", "a juicy steak", 60);
-        Food fish = new Food("fish", "a smelly fish", -40);
+        Food bread = new Food("bread", "a loaf of stale bread", 5.3 ,10);
+        Food mushroom = new Food("mushroom", "a pale glowing mushroom",0.4,-50);
+        Food steak = new Food("steak", "a juicy steak",0.4,60);
+        Food fish = new Food("fish", "a smelly fish", 0.6,-40);
 
         room4.addItem(bread);
         room7.addItem(mushroom);
         room8.addItem(steak);
         room5.addItem(fish);
 
-        RangedWeapon revolver = new RangedWeapon("revolver", "an old revolver",5);
-        MeleeWeapon dagger = new MeleeWeapon("dagger", "a rusty dagger");
+        RangedWeapon revolver = new RangedWeapon("revolver", "an old revolver",0.7,5);
+        MeleeWeapon dagger = new MeleeWeapon("dagger", "a rusty dagger",0.6);
 
 
         room5.addItem(revolver);

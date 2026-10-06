@@ -1,7 +1,7 @@
 public abstract class Weapon extends Item {
 
-    public Weapon(String itemName, String ItemDescription) {
-        super(itemName, ItemDescription);
+    public Weapon(String itemName, String itemDescription, double itemWeight) {
+        super(itemName, itemDescription, itemWeight);
     }
 
     public abstract boolean canUse();

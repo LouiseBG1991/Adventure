@@ -7,6 +7,7 @@ public class Player {
     private int playerHealth;
     private Item equippedWeapon;
     private int shotsLeft;
+    private double maxWeight = 10.0;
 
     // Konstruktør til at oprette en ny spiller i det første rum
     public Player (Room currentRoom) {
@@ -87,24 +88,22 @@ public class Player {
         currentRoom = nextRoom;
         return true;
     }
-    public Item takeItem(String itemName) {
-
-        // Finder item'et i det rum spilleren står i
+    public TakeResult takeItem(String itemName) {
         Item item = currentRoom.findItem(itemName);
 
-        // Hvis item'et ikke findes, returnerer vi null
+        // ikke eksisterende
         if (item == null) {
-            return null;
+            return TakeResult.NOT_FOUND;
         }
 
-        // Fjerner item'et fra rummet
+        //for høj Vægt
+        if (getCurrentWeight() + item.getItemWeight() > maxWeight) {
+            return TakeResult.TOO_HEAVY;
+        }
+
         currentRoom.removeItem(item);
-
-        // Tilføjer item'et til spillerens inventory
         playerItems.add(item);
-
-        // Returnerer item'et, så UserInterface kan skrive en besked
-        return item;
+        return TakeResult.TAKE;
     }
     // Forsøger at droppe et item fra spillerens inventory
     public Item dropItem(String itemName) {
@@ -210,4 +209,26 @@ public class Player {
         }
         return null;
     }
+    // Tjekker om en genstand kan bæres uden at overskride maxWeight
+    public boolean canCarry(String itemName) {
+        Item itemWeight = currentRoom.findItem(itemName);
+        if (itemWeight == null) {
+            return true;
+
+        }
+        return (getCurrentWeight() + itemWeight.getItemWeight()) <= maxWeight;
+    }
+    public double getCurrentWeight() {
+        double totalWeight = 0;
+        for (int i = 0; i < playerItems.size(); i++) {
+            totalWeight = totalWeight + playerItems.get(i).getItemWeight();
+        }
+        return totalWeight;
+    }
+
+    public double getMaxWeight() {
+        return maxWeight;
+    }
+
+
 }

@@ -54,22 +54,25 @@ public class UserInterface {
     }
 
     public void take(String command) {
+        String itemName = command.substring(5).trim();
+        TakeResult result = adventure.takeItem(itemName);
 
-        // Henter item-navnet fra kommandoen
-        // "take lamp" bliver til "lamp"
-        String itemName = command.substring(5);
-
-        // Beder Adventure om at forsøge at tage item'et
-        Item item = adventure.takeItem(itemName);
-
-        // Hvis takeItem returnerer null, blev item'et ikke fundet
-        if (item == null) {
-            IO.println("There is nothing like " + itemName + " to take around here");
-        } else {
-            // Ellers blev item'et fundet og fjernet fra rummet
-            IO.println("You have taken " + item.getItemDescription());
+        switch (result) {
+            case TAKE -> {
+                Item item = adventure.findItemByName(itemName);
+                if (item != null) {
+                    IO.println("You have taken the " + item.getItemDescription());
+                } else {
+                    IO.println("You have taken " + itemName);
+                }
+            }
+            case TOO_HEAVY -> {
+                IO.println("You cannot carry that much weight! Drop something first.");
+            }
+            case NOT_FOUND -> {
+                IO.println("There is nothing like " + itemName + " to take around here");
+            }
         }
-
     }
 
     public void drop(String command) {

@@ -2,8 +2,8 @@ public class Food extends Item{
 
     private int healthPoints;
 
-    public Food (String itemName, String itemDescription, int healthPoints) {
-        super(itemName, itemDescription);
+    public Food (String itemName, String itemDescription, double itemWeight,int healthPoints) {
+        super(itemName, itemDescription, itemWeight);
         this.healthPoints = healthPoints;
     }
 
