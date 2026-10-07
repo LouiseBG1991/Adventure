@@ -117,9 +117,9 @@ public class Adventure {
         attackSceneDescription += "\nThe " + enemy.getEnemyName() + " has " + enemy.getEnemyHealth() + " health left.";
 
         int playerHealthBefore = player.getPlayerHealth();
-        AttackResult counter = enemy.attackPlayer(player);
+        AttackResult counterAttack = enemy.attackPlayer(player);
 
-        if (counter == AttackResult.SWING || counter == AttackResult.FIRE) {
+        if (counterAttack == AttackResult.SWING || counterAttack == AttackResult.FIRE) {
             int damageTaken = playerHealthBefore - player.getPlayerHealth();
             attackSceneDescription += "\nThe " + enemy.getEnemyName() + " hits you for " + damageTaken + " dmg.";
             attackSceneDescription += "\nYou have " + player.getPlayerHealth() + " health.";

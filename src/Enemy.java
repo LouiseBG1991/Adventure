@@ -57,7 +57,11 @@ public class Enemy {
         shotsLeftEnemy = weapon.use();
         player.hit(weapon.getDamagePerStrike(weapon));
 
-        return (shotsLeftEnemy == -1) ? AttackResult.SWING : AttackResult.FIRE;
+        if (shotsLeftEnemy == -1) {
+            return AttackResult.SWING;
+        } else {
+            return AttackResult.FIRE;
+        }
     }
 
 }

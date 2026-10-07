@@ -138,25 +138,6 @@ public class Player {
         return item;
     }
 
-    // Fjenden skal "findes", fjenden skal angribes, hvis fjenden overlever, angriber den
-    public AttackResult attack(String chosenEnemy) {
-        if (equippedWeapon == null) {
-            return AttackResult.NO_WEAPON;
-        }
-        Weapon weapon = (Weapon) equippedWeapon;
-        if (!weapon.canUse()) {
-            return AttackResult.NO_AMMUNITION;
-        }
-        shotsLeft = weapon.use();
-        if (shotsLeft == -1) {
-            getCurrentRoom().findEnemyByName(chosenEnemy).hit(weapon.getDamagePerStrike(equippedWeapon));
-
-            return AttackResult.SWING;
-        } else {
-            return AttackResult.FIRE;
-        }
-    }
-
     public EatResult eat(String chosenEatItem) {
         Item foundItem = findItemByName(chosenEatItem);
 
@@ -211,7 +192,11 @@ public class Player {
         shotsLeft = weapon.use();
         chosenEnemy.hit(weapon.getDamagePerStrike(weapon));
 
-        return (shotsLeft == -1) ? AttackResult.SWING : AttackResult.FIRE;
+        if (shotsLeft == -1) {
+            return AttackResult.SWING;
+        }  else {
+            return AttackResult.FIRE;
+        }
     }
 
     public String healthDescription() {
