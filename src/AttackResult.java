@@ -1,1 +1,1 @@
-public enum AttackResult {NO_WEAPON, NO_AMMUNITION, SWING, FIRE}
+public enum AttackResult {NO_WEAPON, NO_AMMUNITION, NO_ENEMY, SWING, FIRE}

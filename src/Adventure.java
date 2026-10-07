@@ -16,11 +16,11 @@ public class Adventure {
         return player.go(direction);
     }
 
-    // Sender take-kommandoen videre til Player
+    // Sender take-kommandoen videre til UI
     public Item takeItem(String itemName) {
         return player.takeItem(itemName);
     }
-    //Sender drop-kommandoen videre til Player
+    //Sender drop-kommandoen videre til UI
     public Item dropItem(String itemName) {
         return player.dropItem(itemName);
     }
@@ -38,32 +38,19 @@ public class Adventure {
     public ArrayList<Item> getPlayerItems() {
         return player.getPlayerItems();
     }
-    public Room getCurrentRoom (){
-        return gameMap.getCurrentRoom();
-    }
-    public Room getLight (){
-        return getLight();
+    public Room getCurrentRoom() {
+        return player.getCurrentRoom();
     }
 
-    public boolean setLightTrue(){
-        return getCurrentRoom().setLightTrue();
-    }
+    public boolean setLightFalse() {
+        return getCurrentRoom().setLightFalse();
 
-    public boolean setLightFalse(){
-        return getCurrentRoom().setLightTrue();
     }
     public int getPlayerHealth() {
         return player.getPlayerHealth();
     }
     public String getHealthDescription(){
         return player.healthDescription();
-    }
-    public String getItemName (){
-        return getItemName();
-    }
-
-    public EatResult eat(String food){
-        return player.eat(food);
     }
 
     public EquipResult equip(String chosenEquipWeapon) {
@@ -73,20 +60,102 @@ public class Adventure {
     public Item getEquippedWeapon() {
         return player.getEquippedWeapon();
     }
-
-    public Item findItemByName (String chosenItem){
-        return player.findItemByName(chosenItem);
+    public boolean isPlayerDead() {
+        return player.isDead();
     }
 
-    public AttackResult attack () {
-        return player.attack();
+    public String attack(String enemyName) {
+        Room room = player.getCurrentRoom();
+        Enemy enemy = null;
+
+        if (enemyName.equals("")) {
+            // Ingen valgt: tag den første fjende i rummet
+            if (!room.getEnemies().isEmpty()) {
+                enemy = room.getEnemies().get(0);
+            }
+        } else {
+            enemy = room.findEnemyByName(enemyName);
+        }
+        int enemyHealthBefore = 0;
+        if (enemy != null) {
+            enemyHealthBefore = enemy.getEnemyHealth();
+        }
+
+        AttackResult result = player.attack(enemy);
+
+        if (result == AttackResult.NO_WEAPON) {
+            return "You don't have an equipped weapon.";
+        }
+        if (result == AttackResult.NO_AMMUNITION) {
+            return "You don't have any ammunition left.";
+        }
+        if (result == AttackResult.NO_ENEMY) {
+            return "There is no enemy like '" + enemyName + "' here to attack.";
+        }
+        // Spillerens angreb
+        String weaponTotalDescription = player.getEquippedWeapon().getItemDescription();
+        String attackSceneDescription;
+        if (result == AttackResult.SWING) {
+            attackSceneDescription = "You swing " + weaponTotalDescription + " at the " + enemy.getEnemyName() + ".";
+        } else {
+            attackSceneDescription = "You fire " + weaponTotalDescription + " at the " + enemy.getEnemyName()
+                    + ". " + player.getShotsLeft() + " shots left.";
+        }
+        int damageDealt = enemyHealthBefore - enemy.getEnemyHealth();
+        attackSceneDescription += "\nYou deal " + damageDealt + " dmg.";
+
+        // Fjenden dør og kan ikke slå igen
+        if (enemy.isDead()) {
+            Item dropped = enemy.enemyDies();
+            attackSceneDescription += "\nThe " + enemy.getEnemyName() + " dies.";
+            if (dropped != null) {
+                attackSceneDescription += "\nIt drops " + dropped.getItemDescription() + ".";
+            }
+            return attackSceneDescription;
+        }
+        // Fjenden overlever og angriber igen
+        attackSceneDescription += "\nThe " + enemy.getEnemyName() + " has " + enemy.getEnemyHealth() + " health left.";
+
+        int playerHealthBefore = player.getPlayerHealth();
+        AttackResult counter = enemy.attackPlayer(player);
+
+        if (counter == AttackResult.SWING || counter == AttackResult.FIRE) {
+            int damageTaken = playerHealthBefore - player.getPlayerHealth();
+            attackSceneDescription += "\nThe " + enemy.getEnemyName() + " hits you for " + damageTaken + " dmg.";
+            attackSceneDescription += "\nYou have " + player.getPlayerHealth() + " health.";
+        } else {
+            attackSceneDescription += "\nThe " + enemy.getEnemyName() + " can't attack back.";
+        }
+
+        if (player.isDead()) {
+            attackSceneDescription += "\nYou're dead. Game over!";
+        }
+        return attackSceneDescription;
     }
 
-    public int getShotsleft () {
-        return player.getShotsLeft();
-
+    public boolean setLight (){
+        if (getCurrentRoom().getLight() == false){
+            getCurrentRoom().setLightTrue();
+            return true;
+        } else {
+            getCurrentRoom().setLightFalse();
+            return false;
+        }
     }
-
+    public String eat(String foodName){
+        EatResult result = player.eat(foodName);
+        if (result == EatResult.NOT_FOUND) {
+            return "There is nothing like " + foodName + " to eat around here.";
+        } else if (result == EatResult.NOT_FOOD) {
+            return "You cannot eat " + foodName + ".";
+        } else if (result == EatResult.EATEN) {
+            return  "You eat " + foodName + ".";
+        }
+        return null;
     }
+}
+
+
+
 
 
