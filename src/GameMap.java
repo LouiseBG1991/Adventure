@@ -82,11 +82,10 @@ public class GameMap {
         map[1][2]=room6;
         map[2][2]=room9;
 
-        Item sword = new Item("sword", "a sharp sword");
         Item lamp = new Item("lamp", "a shiny brass lamp");
         Item dungeonMap = new Item("map", "a map of the dungeon");
 
-        room1.addItem(sword);
+
         room1.addItem(lamp);
         room2.addItem(dungeonMap);
 
@@ -100,14 +99,32 @@ public class GameMap {
         room8.addItem(steak);
         room5.addItem(fish);
 
-        RangedWeapon revolver = new RangedWeapon("revolver", "an old revolver",5);
-        MeleeWeapon dagger = new MeleeWeapon("dagger", "a rusty dagger");
+        RangedWeapon revolver = new RangedWeapon("revolver", "an old revolver", 5, 30);
+        MeleeWeapon dagger = new MeleeWeapon("dagger", "a rusty dagger", 10);
+        MeleeWeapon rock = new MeleeWeapon("rock", "a big rock", 15);
+        MeleeWeapon club = new MeleeWeapon("club", "a big wooden club", 30);
+        MeleeWeapon sword = new MeleeWeapon("sword", "a sharp sword", 40);
+        RangedWeapon bow = new RangedWeapon("bow", "a longbow", 5, 40);
+        MeleeWeapon laptop = new MeleeWeapon("laptop", "A laptop with intellij", 20);
 
+
+        Enemy troll = new Enemy("troll", "a nasty troll", room9, rock);
+        Enemy orc = new Enemy("orc", "a mean orc", room1, club);
+        Enemy archer = new Enemy("archer", "an angry archer", room2, bow);
+        Enemy spider = new Enemy("spider", "a giant spider", room8, null);
+        Enemy teacher = new Enemy( "Ian", "An angry teacher!", room1, laptop);
+
+        room9.addEnemy(troll);
+        room8.addEnemy(spider);
+        room1.addEnemy(orc);
+        room2.addEnemy(archer);
+        room1.addEnemy(teacher);
 
         room5.addItem(revolver);
         room9.addItem(dagger);
+        room1.addItem(sword);
 
-}
+    }
 
     // Udskriver et kort i konsollen, hvor spillerens aktuelle position markeres med X
     public String makeMap() {

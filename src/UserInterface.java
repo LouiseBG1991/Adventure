@@ -30,11 +30,13 @@ public class UserInterface {
                 equip(command);
                 continue;
             }
-            if (command.startsWith("attack")) {
+            if (command.equals("attack") || command.startsWith("attack ")) {
                 attack(command);
+                if (adventure.isPlayerDead()) {
+                    activeAdventure = false;
+                }
                 continue;
             }
-
             switch (command) {
                 case "inventory" -> inventory();
                 case "north", "n" -> goDirection("north");
@@ -44,7 +46,7 @@ public class UserInterface {
                 case "exit" -> {exit();activeAdventure = false;}
                 case "help" -> help();
                 case "look" -> look();
-                case "light" -> light();
+                case "light" -> setLight();
                 case "health" -> IO.println(adventure.getHealthDescription());
                 default -> IO.println("invalid input");
             }
@@ -58,10 +60,8 @@ public class UserInterface {
         // Henter item-navnet fra kommandoen
         // "take lamp" bliver til "lamp"
         String itemName = command.substring(5);
-
         // Beder Adventure om at forsøge at tage item'et
         Item item = adventure.takeItem(itemName);
-
         // Hvis takeItem returnerer null, blev item'et ikke fundet
         if (item == null) {
             IO.println("There is nothing like " + itemName + " to take around here");
@@ -83,16 +83,9 @@ public class UserInterface {
     }
     public void eat(String command){
         String foodName = command.substring(4);
-        EatResult result = adventure.eat(foodName);
-        if (result == EatResult.NOT_FOUND) {
-            IO.println("There is nothing like " + foodName + " to eat around here.");
-        } else if (result == EatResult.NOT_FOOD) {
-            IO.println("You cannot eat " + foodName + ".");
-        } else if (result == EatResult.EATEN) {
-            IO.println("You eat " + foodName + ".");
-        }
-        }
-        public void equip(String command) {
+        IO.println(adventure.eat(foodName));
+    }
+    public void equip(String command) {
         String weaponName = command.substring(6);
         EquipResult result = adventure.equip(weaponName);
         if (result == EquipResult.NOT_FOUND) {
@@ -102,25 +95,18 @@ public class UserInterface {
         } else if (result == EquipResult.EQUIPPED) {
             IO.println("You have equipped " + weaponName + ".");
         }
-        }
+    }
 
-        public void attack(String command) {
-        AttackResult result = adventure.attack();
-        Item weapon = adventure.getEquippedWeapon();
-        if (result == AttackResult.NO_WEAPON) {
-            IO.println("You don't have an equipped weapon.");
-        } else if (result == AttackResult.NO_AMMUNITION) {
-            IO.println ("You don't have any ammunition left.");
-        } else if (result == AttackResult.SWING) {
-            IO.println("You swing " + weapon.getItemDescription() + " into the air");
-        } else if (result == AttackResult.FIRE) {
-            int shots = adventure.getShotsleft();
-            IO.println("You fire " + weapon.getItemDescription() + " into the empty air. " + shots + " shots left");
-        }
-        }
+    public void attack(String command) {
+        String enemyName = command.substring(7);
+        IO.println(adventure.attack(enemyName));
+    }
+
+
 
     public void help() {
-        IO.println("The commands are; n for north, e for east, w for west, s for south, Help for help, and Exit for exit.");
+        IO.println("The commands for movement are; n for north, e for east, w for west, s for south. ");
+        IO.println("Other commands include: Help, Exit, look, health, take, attack, equip, drop and eat.");
     }
 
     public void look() {
@@ -134,8 +120,6 @@ public class UserInterface {
 
     public void exit() {
         IO.println("goodbye");
-
-
     }
 
     public void goDirection(String direction) {
@@ -150,15 +134,7 @@ public class UserInterface {
         }
     }
 
-    public void light() {
-        if (adventure.getCurrentRoom().getLight()) {
-            adventure.setLightFalse();
-            IO.println("You turned off the light");
-        } else {
-            adventure.setLightTrue();
-            IO.println("You turned on the light");
-        }
-    }
+
 
     public void inventory() {
         if (adventure.getPlayerItems().isEmpty()) {
@@ -167,10 +143,8 @@ public class UserInterface {
             String inventoryText = "You are carrying: ";
             // Går igennem alle items i inventory
             for (int i = 0; i < adventure.getPlayerItems().size(); i++) {
-
                 // henter item og tilføjer beskrivelse til teksten
                 inventoryText = inventoryText + adventure.getPlayerItems().get(i).getItemDescription();
-
                 // kontrollerer om item er det sidste i inventory
                 if (i < adventure.getPlayerItems().size() - 1) {
 
@@ -189,5 +163,11 @@ public class UserInterface {
         }
 
     }
-
+    public void setLight (){
+        if (adventure.setLight()) {
+            IO.println("You turned on the light.");
+        } else {
+            IO.println("You turned off the light.");
+        }
+    }
 }

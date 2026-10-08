@@ -17,7 +17,7 @@ public class Item {
 
     @Override
     public boolean equals(Object obj) {
-        Item other = (Item) obj;
+        if (!(obj instanceof Item other)) return false;
         return this.itemName.equals(other.itemName) && this.itemDescription.equals(other.itemDescription);
     }
 }
