@@ -9,8 +9,25 @@ public class UserInterface {
 
     public void startAdventure() {
         boolean activeAdventure = true;
-        IO.println("Welcome to the adventure game, you can move in 4 directions by typing n for north, e for east, s for south, w for west.");
-        IO.println("Remember to turn on the light!");
+        IO.println();
+        IO.println("----------------------------------------- ADVENTUREGAME ---------------------------------");
+        IO.println();
+        IO.println("Welcome to the adventure game!");
+        IO.println();
+        IO.println("You can move in 4 directions by typing n for north, e for east, s for south, w for west.");
+        IO.println();
+        IO.println("Write 'look' to look around the room");
+        IO.println("Write 'take' followed by the name of the item or food item to take an item or food item ");
+        IO.println("Write 'drop' followed by the name of the item to drop an item");
+        IO.println("Write 'eat' followed by the food name to eat food");
+        IO.println("Write 'equip' to equip your weapon");
+        IO.println("Write 'inventory' to check inventory");
+        IO.println("Write 'health' to check health");
+        IO.println("Write 'attack' followed by the name of the enemy to attack");
+        IO.println("Write 'help' to get instructions");
+        IO.println();
+        IO.println("Remember to turn on the light by writing 'light'!");
+
         while (activeAdventure) {
             String command = IO.readln("\nWhich action do you wanna take? ");
             // Tjekker om brugeren skriver fx "take lamp"
@@ -98,7 +115,10 @@ public class UserInterface {
     }
 
     public void attack(String command) {
-        String enemyName = command.substring(7);
+        String enemyName = "";
+        if (command.length() > 6) {
+            enemyName = command.substring(7);
+        }
         IO.println(adventure.attack(enemyName));
     }
 
@@ -133,8 +153,6 @@ public class UserInterface {
             IO.println("You cant see anything");
         }
     }
-
-
 
     public void inventory() {
         if (adventure.getPlayerItems().isEmpty()) {

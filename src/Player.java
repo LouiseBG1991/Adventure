@@ -161,11 +161,12 @@ public class Player {
             if (item.getItemName().equalsIgnoreCase(chosenEatItem)) {
                 return item;
             }
-        }
-        for (Item item : getCurrentRoom().getRoomItems()) {
-            if (item.getItemName().equalsIgnoreCase(chosenEatItem)) {
-                return item;
-            }
+            //hvis denne kodeblok aktiveres kan man equippe våben direkte fra rummet, men man skal kun kunne equippe fra inventory
+//        }
+//        for (Item item : getCurrentRoom().getRoomItems()) {
+//            if (item.getItemName().equalsIgnoreCase(chosenEatItem)) {
+//                return item;
+//            }
         }
         return null;
     }
@@ -212,7 +213,6 @@ public class Player {
             return EquipResult.NOT_FOUND;
         } else if (foundItem instanceof Weapon) {
             equippedWeapon = foundItem;
-            playerItems.remove(foundItem);
             getCurrentRoom().removeItem(foundItem);
             return EquipResult.EQUIPPED;
         }

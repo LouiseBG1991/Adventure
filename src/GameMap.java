@@ -105,14 +105,14 @@ public class GameMap {
         MeleeWeapon club = new MeleeWeapon("club", "a big wooden club", 30);
         MeleeWeapon sword = new MeleeWeapon("sword", "a sharp sword", 40);
         RangedWeapon bow = new RangedWeapon("bow", "a longbow", 5, 40);
-        MeleeWeapon laptop = new MeleeWeapon("laptop", "A laptop with intellij", 20);
+        MeleeWeapon laptop = new MeleeWeapon("laptop", "a laptop with intellij", 20);
 
 
         Enemy troll = new Enemy("troll", "a nasty troll", room9, rock);
         Enemy orc = new Enemy("orc", "a mean orc", room1, club);
         Enemy archer = new Enemy("archer", "an angry archer", room2, bow);
         Enemy spider = new Enemy("spider", "a giant spider", room8, null);
-        Enemy teacher = new Enemy( "Ian", "An angry teacher!", room1, laptop);
+        Enemy teacher = new Enemy( "teacher", "an angry teacher called Ian!", room1, laptop);
 
         room9.addEnemy(troll);
         room8.addEnemy(spider);

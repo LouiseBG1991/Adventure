@@ -68,7 +68,7 @@ public class Adventure {
         Room room = player.getCurrentRoom();
         Enemy enemy = null;
 
-        if (enemyName.equals("")) {
+        if (enemyName.isEmpty()) {
             // Ingen valgt: tag den første fjende i rummet
             if (!room.getEnemies().isEmpty()) {
                 enemy = room.getEnemies().get(0);
@@ -90,15 +90,15 @@ public class Adventure {
             return "You don't have any ammunition left.";
         }
         if (result == AttackResult.NO_ENEMY) {
-            return "There is no enemy like '" + enemyName + "' here to attack.";
+            return "There is no enemy here to attack.";
         }
         // Spillerens angreb
         String weaponTotalDescription = player.getEquippedWeapon().getItemDescription();
         String attackSceneDescription;
         if (result == AttackResult.SWING) {
-            attackSceneDescription = "You swing " + weaponTotalDescription + " at the " + enemy.getEnemyName() + ".";
+            attackSceneDescription = "You swing " + weaponTotalDescription + " at the " + enemy.getEnemyDescription();
         } else {
-            attackSceneDescription = "You fire " + weaponTotalDescription + " at the " + enemy.getEnemyName()
+            attackSceneDescription = "You fire " + weaponTotalDescription + " at the " + enemy.getEnemyDescription()
                     + ". " + player.getShotsLeft() + " shots left.";
         }
         int damageDealt = enemyHealthBefore - enemy.getEnemyHealth();
@@ -114,7 +114,7 @@ public class Adventure {
             return attackSceneDescription;
         }
         // Fjenden overlever og angriber igen
-        attackSceneDescription += "\nThe " + enemy.getEnemyName() + " has " + enemy.getEnemyHealth() + " health left.";
+        attackSceneDescription += "\nThe " + enemy.getEnemyName() + " has " + enemy.getEnemyHealth() + " healthpoints left.";
 
         int playerHealthBefore = player.getPlayerHealth();
         AttackResult counterAttack = enemy.attackPlayer(player);
@@ -122,7 +122,7 @@ public class Adventure {
         if (counterAttack == AttackResult.SWING || counterAttack == AttackResult.FIRE) {
             int damageTaken = playerHealthBefore - player.getPlayerHealth();
             attackSceneDescription += "\nThe " + enemy.getEnemyName() + " hits you for " + damageTaken + " dmg.";
-            attackSceneDescription += "\nYou have " + player.getPlayerHealth() + " health.";
+            attackSceneDescription += "\nYou have " + player.getPlayerHealth() + " healthpoints left.";
         } else {
             attackSceneDescription += "\nThe " + enemy.getEnemyName() + " can't attack back.";
         }
